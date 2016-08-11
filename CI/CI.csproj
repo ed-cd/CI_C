@@ -63,6 +63,8 @@
     <Compile Include="QueueFromStacks.cs" />
     <Compile Include="Three_5_Test.cs" />
     <Compile Include="Three_6_Test.cs" />
+    <Compile Include="Three_7.cs" />
+    <Compile Include="Three_7_Test.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
