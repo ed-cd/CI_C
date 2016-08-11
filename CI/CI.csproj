@@ -52,11 +52,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CustomClasses.cs" />
+    <Compile Include="Three_1_to_3.cs" />
+    <Compile Include="Three_6.cs" />
     <Compile Include="One_11.cs" />
     <Compile Include="One_11_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Three_3.cs" />
     <Compile Include="Three_3_Test.cs" />
+    <Compile Include="QueueFromStacks.cs" />
+    <Compile Include="Three_5_Test.cs" />
+    <Compile Include="Three_6_Test.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
