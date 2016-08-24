@@ -8,7 +8,7 @@ namespace CI
     {
         [TestMethod]
         public void TestMethod1() {
-            var tree = new Btree<int>();
+            var tree = new Tree<int>();
             tree.Add(1);
             tree.Add(2);
             tree.Add(3);
