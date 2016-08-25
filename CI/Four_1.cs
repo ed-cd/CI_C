@@ -20,7 +20,15 @@
         }
 
         public static bool operator >(TreeNode<T> left, TreeNode<T> right) {
-            return !(left < right);
+            return !(left < right) && left != right;
+        }
+
+        public static bool operator ==(TreeNode<T> left, TreeNode<T> right) {
+            return right != null && left?.Value.CompareTo(right.Value) == 0;
+        }
+
+        public static bool operator !=(TreeNode<T> left, TreeNode<T> right) {
+            return !(left == right);
         }
     }
 
@@ -77,8 +85,42 @@
                 return nodeToAdd;
             }
 
+            if (nodeToAdd == root) {
+                throw new BTreeDuplicateException();
+            }
+
+            var dLeft = getDepth(root.Left);
+            var dRight = getDepth(root.Right);
+            if (dLeft == dRight) {
+                if (nodeToAdd < root) {
+                    root.Left = Add(nodeToAdd, root.Left);
+                }
+                else {
+                    root.Right = Add(nodeToAdd, root.Right);
+                }
+                return root;
+            }
+            if (dLeft > dRight) {
+                if (nodeToAdd > root) {
+                    root.Right = Add(nodeToAdd, root.Right);
+                    return root;
+                }
+                else {
+                    if (nodeToAdd == root.Left) {
+                        throw new BTreeDuplicateException();
+                    }
+                    if(nodeToAdd >)
+                }
+            }
+            else {}
+
             if (nodeToAdd < root) {
-                root.Left = Add(nodeToAdd, root.Left);
+                if (root.Left == null) {
+                    root.Left = nodeToAdd;
+                }
+                else {
+                    root.Left = Add(nodeToAdd, root.Left);
+                }
             }
             else {
                 root.Right = Add(nodeToAdd, root.Right);
@@ -86,5 +128,7 @@
 
             return null;
         }
+
+        public class BTreeDuplicateException : Exception {}
     }
 }
