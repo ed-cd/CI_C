@@ -131,8 +131,30 @@
                     return root;
                 }
             }
-            else {
-                
+            else {//dRight > dleft
+                if (nodeToAdd < root) {
+                    root.Left = Add(nodeToAdd, root.Left);
+                    return root;
+                }//else
+                if (nodeToAdd == root.Right) {
+                    throw new BTreeDuplicateException();
+                }
+                if (nodeToAdd < root.Right) {
+                    var temp = root.Value;
+                    root.Value = nodeToAdd.Value;
+                    nodeToAdd.Value = temp;
+                    root.Right = Add(nodeToAdd, root.Right);
+                    return root;
+                }
+                else {
+                    var temp = root.Left.Value;
+                    root.Left.Value = nodeToAdd.Value;
+                    temp = root.Value;
+                    root.Value = nodeToAdd.Value;
+                    nodeToAdd.Value = temp;
+                    root.Right = Add(nodeToAdd, root.Right);
+                    return root;
+                }
             }
 
             if (nodeToAdd < root) {
