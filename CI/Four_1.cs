@@ -22,6 +22,12 @@
         public static bool operator >(TreeNode<T> left, TreeNode<T> right) {
             return !(left < right) && left != right;
         }
+        public static bool operator <=(TreeNode<T> left, TreeNode<T> right) {
+            return left < right || left == right;
+        }
+        public static bool operator >=(TreeNode<T> left, TreeNode<T> right) {
+            return !(left < right);
+        }
 
         public static bool operator ==(TreeNode<T> left, TreeNode<T> right) {
             return right != null && left?.Value.CompareTo(right.Value) == 0;
@@ -101,18 +107,33 @@
                 return root;
             }
             if (dLeft > dRight) {
-                if (nodeToAdd > root) {
+                if (nodeToAdd >= root) {
+                    root.Right = Add(nodeToAdd, root.Right);
+                    return root;
+                }
+                if (nodeToAdd == root.Left) {
+                    throw new BTreeDuplicateException();
+                }
+                if (nodeToAdd > root.Left) {
+                    var temp = root.Value;
+                    root.Value = nodeToAdd.Value;
+                    nodeToAdd.Value = temp;
                     root.Right = Add(nodeToAdd, root.Right);
                     return root;
                 }
                 else {
-                    if (nodeToAdd == root.Left) {
-                        throw new BTreeDuplicateException();
-                    }
-                    if(nodeToAdd >)
+                    var temp = root.Left.Value;
+                    root.Left.Value = nodeToAdd.Value;
+                    temp = root.Value;
+                    root.Value = nodeToAdd.Value;
+                    nodeToAdd.Value = temp;
+                    root.Right = Add(nodeToAdd, root.Right);
+                    return root;
                 }
             }
-            else {}
+            else {
+                
+            }
 
             if (nodeToAdd < root) {
                 if (root.Left == null) {
