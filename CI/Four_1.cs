@@ -143,12 +143,12 @@
                     var temp = root.Value;
                     root.Value = nodeToAdd.Value;
                     nodeToAdd.Value = temp;
-                    root.Right = Add(nodeToAdd, root.Right);
+                    root.Right = Add(nodeToAdd, root.Left);
                     return root;
                 }
                 else {
-                    var temp = root.Left.Value;
-                    root.Left.Value = nodeToAdd.Value;
+                    var temp = root.Right.Value;
+                    root.Right.Value = nodeToAdd.Value;
                     temp = root.Value;
                     root.Value = nodeToAdd.Value;
                     nodeToAdd.Value = temp;
