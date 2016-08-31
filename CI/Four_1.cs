@@ -30,7 +30,7 @@
         }
 
         public static bool operator ==(TreeNode<T> left, TreeNode<T> right) {
-            return right != null && left?.Value.CompareTo(right.Value) == 0;
+            return (ReferenceEquals(left,null)&& ReferenceEquals(right, null)) || (right != null && left?.Value.CompareTo(right.Value) == 0);
         }
 
         public static bool operator !=(TreeNode<T> left, TreeNode<T> right) {
@@ -44,15 +44,15 @@
 
         protected TreeNode<T> Root { get; set; }
 
+        public bool IsValid => checkIfValid(Root);
+
         public void Add(T value) {
             var nodeToAdd = new TreeNode<T>(value);
             Root = Add(nodeToAdd, Root);
             Count++;
         }
 
-        public bool IsBalanced() {
-            return getDepth(Root) != -1;
-        }
+        public bool IsBalanced => getDepth(Root) != -1;
 
         protected virtual TreeNode<T> Add(TreeNode<T> nodeToAdd, TreeNode<T> root) {
             if (root == null) {
@@ -81,6 +81,10 @@
             }
 
             return Math.Max(leftDepth, rightDepth) + 1;
+        }
+
+        protected static bool checkIfValid(TreeNode<T> root) {
+            return root == null || (root?.Left < root && root?.Right >= root) && (checkIfValid(root.Left) && checkIfValid(root.Right));
         }
     }
 
@@ -119,59 +123,64 @@
                     root.Value = nodeToAdd.Value;
                     nodeToAdd.Value = temp;
                     root.Right = Add(nodeToAdd, root.Right);
+                    reShuffle(root.Left);
                     return root;
                 }
                 else {
                     var temp = root.Left.Value;
                     root.Left.Value = nodeToAdd.Value;
+                    nodeToAdd.Value = temp;
                     temp = root.Value;
                     root.Value = nodeToAdd.Value;
                     nodeToAdd.Value = temp;
                     root.Right = Add(nodeToAdd, root.Right);
+                    reShuffle(root.Left);
                     return root;
                 }
             }
-            else {//dRight > dleft
-                if (nodeToAdd < root) {
-                    root.Left = Add(nodeToAdd, root.Left);
-                    return root;
-                }//else
-                if (nodeToAdd == root.Right) {
-                    throw new BTreeDuplicateException();
-                }
-                if (nodeToAdd < root.Right) {
-                    var temp = root.Value;
-                    root.Value = nodeToAdd.Value;
-                    nodeToAdd.Value = temp;
-                    root.Right = Add(nodeToAdd, root.Left);
-                    return root;
-                }
-                else {
-                    var temp = root.Right.Value;
-                    root.Right.Value = nodeToAdd.Value;
-                    temp = root.Value;
-                    root.Value = nodeToAdd.Value;
-                    nodeToAdd.Value = temp;
-                    root.Right = Add(nodeToAdd, root.Right);
-                    return root;
-                }
-            }
-
+            //dRight > dleft
             if (nodeToAdd < root) {
-                if (root.Left == null) {
-                    root.Left = nodeToAdd;
-                }
-                else {
-                    root.Left = Add(nodeToAdd, root.Left);
-                }
+                root.Left = Add(nodeToAdd, root.Left);
+                return root;
+            }//else
+            if (nodeToAdd == root.Right) {
+                throw new BTreeDuplicateException();
+            }
+            if (nodeToAdd < root.Right) {
+                var temp = root.Value;
+                root.Value = nodeToAdd.Value;
+                nodeToAdd.Value = temp;
+                root.Left = Add(nodeToAdd, root.Left);
+                reShuffle(root.Right);
+                return root;
             }
             else {
-                root.Right = Add(nodeToAdd, root.Right);
+                var temp = root.Right.Value;
+                root.Right.Value = nodeToAdd.Value;
+                nodeToAdd.Value = temp;
+                temp = root.Value;
+                root.Value = nodeToAdd.Value;
+                nodeToAdd.Value = temp;
+                root.Left = Add(nodeToAdd, root.Left);
+                reShuffle(root.Right);
+                return root;
             }
-
-            return null;
         }
 
-        public class BTreeDuplicateException : Exception {}
+        protected static void reShuffle(TreeNode<T> root) {
+            if (root == null) return;
+            if (root > root?.Left) {
+                var temp = root.Value;
+                root.Value = root.Left.Value;
+                root.Left.Value = temp;
+                reShuffle(root.Left);
+            } else if (root.Right < root) {
+                var temp = root.Value;
+                root.Value = root.Right.Value;
+                root.Right.Value = temp;
+                reShuffle(root.Right);
+            }
+        }        
     }
+    public class BTreeDuplicateException : Exception { }
 }

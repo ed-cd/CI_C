@@ -69,6 +69,7 @@
     <Compile Include="Three_7_Test.cs" />
     <Compile Include="Four_1_Test.cs" />
     <Compile Include="Four_2_Test.cs" />
+    <Compile Include="Four_3_Test.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

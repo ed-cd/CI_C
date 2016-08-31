@@ -14,10 +14,9 @@ namespace CI
             tree.Add(3);
             tree.Add(0);
             tree.Add(1);
-            Assert.IsTrue(tree.IsBalanced());
+            Assert.IsTrue(tree.IsBalanced);
             tree.Add(1);      
-            Assert.IsFalse(tree.IsBalanced());      
-            var x = 1;
+            Assert.IsFalse(tree.IsBalanced);      
         }
     }
 }
