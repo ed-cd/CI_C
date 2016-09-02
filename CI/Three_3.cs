@@ -24,14 +24,6 @@ namespace CI
 
     public static class MyExtensions
     {
-        public static void Times(this int times, Action action)
-        {
-            for (var n = 0; n < times; n++)
-            {
-                action.Invoke();
-            }
-        }
-
         public static bool CheckTower(this Stack<int> stack, int expectedCount)
         {
             if (expectedCount != stack.Count) return false;

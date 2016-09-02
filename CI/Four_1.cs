@@ -45,7 +45,7 @@
         where T : IComparable {
         public int Count { get; protected set; }
 
-        protected TreeNode<T> Root { get; set; }
+        public TreeNode<T> Root {  get; protected set; }
 
         public bool IsValid => checkIfValid(Root);
 
