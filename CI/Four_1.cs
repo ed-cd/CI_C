@@ -22,15 +22,18 @@
         public static bool operator >(TreeNode<T> left, TreeNode<T> right) {
             return !(left < right) && left != right;
         }
+
         public static bool operator <=(TreeNode<T> left, TreeNode<T> right) {
             return left < right || left == right;
         }
+
         public static bool operator >=(TreeNode<T> left, TreeNode<T> right) {
             return !(left < right);
         }
 
         public static bool operator ==(TreeNode<T> left, TreeNode<T> right) {
-            return (ReferenceEquals(left,null)&& ReferenceEquals(right, null)) || (right != null && left?.Value.CompareTo(right.Value) == 0);
+            return (ReferenceEquals(left, null) && ReferenceEquals(right, null)) ||
+                   (right != null && left?.Value.CompareTo(right.Value) == 0);
         }
 
         public static bool operator !=(TreeNode<T> left, TreeNode<T> right) {
@@ -61,8 +64,7 @@
 
             if (nodeToAdd < root) {
                 root.Left = Add(nodeToAdd, root.Left);
-            }
-            else {
+            } else {
                 root.Right = Add(nodeToAdd, root.Right);
             }
 
@@ -84,7 +86,16 @@
         }
 
         protected static bool checkIfValid(TreeNode<T> root) {
-            return root == null || (root?.Left < root && root?.Right >= root) && (checkIfValid(root.Left) && checkIfValid(root.Right));
+            if (root == null) {
+                return true;
+            }
+            if (root.Left == null && root.Right == null) {
+                return true;
+            }
+            if (root.Left != null && root.Right != null) {
+                return checkIfValid(root.Left) && checkIfValid(root.Right);
+            }
+            return checkIfValid(root.Left ?? root.Right);
         }
     }
 
@@ -104,8 +115,7 @@
             if (dLeft == dRight) {
                 if (nodeToAdd < root) {
                     root.Left = Add(nodeToAdd, root.Left);
-                }
-                else {
+                } else {
                     root.Right = Add(nodeToAdd, root.Right);
                 }
                 return root;
@@ -125,8 +135,7 @@
                     root.Right = Add(nodeToAdd, root.Right);
                     reShuffle(root.Left);
                     return root;
-                }
-                else {
+                } else {
                     var temp = root.Left.Value;
                     root.Left.Value = nodeToAdd.Value;
                     nodeToAdd.Value = temp;
@@ -142,7 +151,7 @@
             if (nodeToAdd < root) {
                 root.Left = Add(nodeToAdd, root.Left);
                 return root;
-            }//else
+            } //else
             if (nodeToAdd == root.Right) {
                 throw new BTreeDuplicateException();
             }
@@ -153,8 +162,7 @@
                 root.Left = Add(nodeToAdd, root.Left);
                 reShuffle(root.Right);
                 return root;
-            }
-            else {
+            } else {
                 var temp = root.Right.Value;
                 root.Right.Value = nodeToAdd.Value;
                 nodeToAdd.Value = temp;
@@ -169,18 +177,19 @@
 
         protected static void reShuffle(TreeNode<T> root) {
             if (root == null) return;
-            if (root > root?.Left) {
+            if (root.Left != null && root > root.Left) {
                 var temp = root.Value;
                 root.Value = root.Left.Value;
                 root.Left.Value = temp;
                 reShuffle(root.Left);
-            } else if (root.Right < root) {
+            } else if (root.Left != null && root.Right < root) {
                 var temp = root.Value;
                 root.Value = root.Right.Value;
                 root.Right.Value = temp;
                 reShuffle(root.Right);
             }
-        }        
+        }
     }
-    public class BTreeDuplicateException : Exception { }
+
+    public class BTreeDuplicateException : Exception {}
 }
