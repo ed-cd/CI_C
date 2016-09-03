@@ -45,7 +45,7 @@
         where T : IComparable {
         public int Count { get; protected set; }
 
-        public TreeNode<T> Root {  get; protected set; }
+        public TreeNode<T> Root {  get; set; }
 
         public bool IsValid => checkIfValid(Root);
 
@@ -89,13 +89,14 @@
             if (root == null) {
                 return true;
             }
-            if (root.Left == null && root.Right == null) {
-                return true;
+            var ret = true;
+            if (root.Left != null) {
+                ret &= root.Left < root;
             }
-            if (root.Left != null && root.Right != null) {
-                return checkIfValid(root.Left) && checkIfValid(root.Right);
+            if (root.Right != null) {
+                ret &= root.Right >= root;
             }
-            return checkIfValid(root.Left ?? root.Right);
+            return ret && checkIfValid(root.Left) && checkIfValid(root.Right);
         }
     }
 
