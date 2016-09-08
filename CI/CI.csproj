@@ -53,8 +53,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CustomClasses.cs" />
-    <Compile Include="Four_1.cs" />
-    <Compile Include="Four_2.cs" />
+    <Compile Include="Trees.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="Four_4.cs" />
     <Compile Include="Three_1_to_3.cs" />
     <Compile Include="Three_6.cs" />
