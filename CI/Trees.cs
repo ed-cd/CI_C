@@ -1,7 +1,7 @@
-﻿namespace CI {
-    using System;
-    using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
+namespace CI {
     [DebuggerDisplay("Value = {Value}")]
     public class TreeNode<T>
         where T : IComparable {
@@ -10,6 +10,8 @@
         public TreeNode<T> Right { get; set; }
 
         public T Value { get; set; }
+
+        public TreeNode() {}
 
         public TreeNode(T value) {
             Value = value;
@@ -41,11 +43,58 @@
         }
     }
 
+    public class TreeNodeWithBackLink<T> : TreeNode<T> where T : IComparable {
+        public TreeNodeWithBackLink<T> Parent { get; set; }
+
+        public TreeNodeWithBackLink(T value, TreeNodeWithBackLink<T> parent) {
+            Value = value;
+            Parent = parent;
+        }
+
+        public TreeNodeWithBackLink<T> NextNodeInOrder() {
+            var current = this;
+
+            if (current.Right != null) {
+                return _TraverseToEndOfLeftSubBranch(current.Right as TreeNodeWithBackLink<T>);
+            }
+            if (current.Parent == null || current.Parent.Right == current) {
+                return null;
+            }
+            return current.Parent;
+        }
+
+        private TreeNodeWithBackLink<T> _TraverseToEndOfLeftSubBranch(TreeNodeWithBackLink<T> current) {
+            if (current == null || current.Left == null) {
+                return current;
+            }
+            return _TraverseToEndOfLeftSubBranch(current.Left as TreeNodeWithBackLink<T>);
+        }
+    }
+
+    public class BinaryTreeWithBackLinks<T> : Tree<T> where T : IComparable {
+        public new void Add(T value) {
+            Root = Add(value, Root as TreeNodeWithBackLink<T>, null);
+            Count++;
+        }
+
+        protected TreeNodeWithBackLink<T> Add(T value, TreeNodeWithBackLink<T> root, TreeNodeWithBackLink<T> parent) {
+            if (root == null) {
+                return new TreeNodeWithBackLink<T>(value, parent);
+            }
+            if (value.CompareTo(root.Value) < 0) {
+                root.Left = Add(value, root.Left as TreeNodeWithBackLink<T>, root);
+            } else {
+                root.Right = Add(value, root.Right as TreeNodeWithBackLink<T>, root);
+            }
+            return root;
+        }
+    }
+
     public class Tree<T>
         where T : IComparable {
         public int Count { get; protected set; }
 
-        public TreeNode<T> Root {  get; set; }
+        public TreeNode<T> Root { get; set; }
 
         public bool IsValid => checkIfValid(Root);
 

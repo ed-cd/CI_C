@@ -73,6 +73,7 @@
     <Compile Include="Four_3_Test.cs" />
     <Compile Include="Four_4_Test.cs" />
     <Compile Include="Four_5_Test.cs" />
+    <Compile Include="Four_6_Test.cs" />
     <Compile Include="UsefulExtensionMethods.cs" />
   </ItemGroup>
   <Choose>
