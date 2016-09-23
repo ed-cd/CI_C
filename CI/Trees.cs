@@ -175,6 +175,29 @@ namespace CI {
             }
             return ret && checkIfValid(root.Left) && checkIfValid(root.Right);
         }
+
+        public bool IsSubtree(Tree<T> candidateTree) {
+            return _IsSubtree(Root,candidateTree.Root);
+        }
+
+        private bool _IsSubtree(TreeNode<T> parentTreeRoot, TreeNode<T> candidateTreeRoot, bool inSubtree = false) {
+            if ((parentTreeRoot == null ^ candidateTreeRoot == null)) {
+                return false;
+            }
+            if (parentTreeRoot == null && candidateTreeRoot == null) {
+                return true;
+            }
+
+            if (parentTreeRoot == candidateTreeRoot) {
+                return _IsSubtree(parentTreeRoot.Left, candidateTreeRoot.Left, true) &&
+                       _IsSubtree(parentTreeRoot.Right, candidateTreeRoot.Right, true);
+            }
+            if (inSubtree) {
+                return false;
+            }
+            return _IsSubtree(parentTreeRoot.Left, candidateTreeRoot) ||
+                   _IsSubtree(parentTreeRoot.Right, candidateTreeRoot);
+        }
     }
 
     public class BTree<T> : Tree<T>

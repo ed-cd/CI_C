@@ -75,6 +75,7 @@
     <Compile Include="Four_5_Test.cs" />
     <Compile Include="Four_6_Test.cs" />
     <Compile Include="Four_7_test.cs" />
+    <Compile Include="Four_8_Test.cs" />
     <Compile Include="UsefulExtensionMethods.cs" />
   </ItemGroup>
   <Choose>
