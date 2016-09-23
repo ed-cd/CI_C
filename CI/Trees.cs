@@ -63,11 +63,39 @@ namespace CI {
             return current.Parent;
         }
 
-        private TreeNodeWithBackLink<T> _TraverseToEndOfLeftSubBranch(TreeNodeWithBackLink<T> current) {
+        private static TreeNodeWithBackLink<T> _TraverseToEndOfLeftSubBranch(TreeNodeWithBackLink<T> current) {
             if (current == null || current.Left == null) {
                 return current;
             }
             return _TraverseToEndOfLeftSubBranch(current.Left as TreeNodeWithBackLink<T>);
+        }
+
+        public static TreeNodeWithBackLink<T> GetClosestMutualAncestorNode(TreeNodeWithBackLink<T> node1,
+            TreeNodeWithBackLink<T> node2, TreeNodeWithBackLink<T> calledFrom = null) {
+            bool found;
+            if (calledFrom == null) {
+                found = IsNodeInSubtree(node1.Left as TreeNodeWithBackLink<T>, node2) ||
+                        IsNodeInSubtree(node1.Right as TreeNodeWithBackLink<T>, node2);
+            } else if (ReferenceEquals(node1, node2)) {
+                found = true;
+            } else if (ReferenceEquals(calledFrom, node1.Left)) {
+                found = IsNodeInSubtree(node1.Right as TreeNodeWithBackLink<T>, node2);
+            } else {
+                found = IsNodeInSubtree(node1.Left as TreeNodeWithBackLink<T>, node2);
+            }
+            return found ? node1 : GetClosestMutualAncestorNode(node1.Parent, node2, node1);
+        }
+
+        private static bool IsNodeInSubtree(TreeNodeWithBackLink<T> root,
+            TreeNodeWithBackLink<T> toFind) {
+            if (root == null) {
+                return false;
+            }
+            if (ReferenceEquals(root, toFind)) {
+                return true;
+            }
+            return IsNodeInSubtree(root.Left as TreeNodeWithBackLink<T>, toFind) ||
+                   IsNodeInSubtree(root.Right as TreeNodeWithBackLink<T>, toFind);
         }
     }
 
