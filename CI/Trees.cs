@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace CI {
     [DebuggerDisplay("Value = {Value}")]
@@ -177,10 +179,10 @@ namespace CI {
         }
 
         public bool IsSubtree(Tree<T> candidateTree) {
-            return _IsSubtree(Root,candidateTree.Root);
+            return _IsSubtree(Root, candidateTree.Root);
         }
 
-        private bool _IsSubtree(TreeNode<T> parentTreeRoot, TreeNode<T> candidateTreeRoot, bool inSubtree = false) {
+        private static bool _IsSubtree(TreeNode<T> parentTreeRoot, TreeNode<T> candidateTreeRoot, bool inSubtree = false) {
             if ((parentTreeRoot == null ^ candidateTreeRoot == null)) {
                 return false;
             }
@@ -197,6 +199,38 @@ namespace CI {
             }
             return _IsSubtree(parentTreeRoot.Left, candidateTreeRoot) ||
                    _IsSubtree(parentTreeRoot.Right, candidateTreeRoot);
+        }
+    }
+
+    public static class TreeExtensions {
+        public static List<List<int>> GetAllPathsThatSumTo(this Tree<int> tree, int goal) {
+            var result = new List<List<int>>();
+            if (tree?.Root != null) {
+                _GetAllPathsThatSumTo(tree.Root, result,
+                    new List<int>(), 0, goal,false);
+            }
+            return result;
+        }
+
+        private static void _GetAllPathsThatSumTo(TreeNode<int> root, List<List<int>> mainList, List<int> soFarList,
+            int soFarValue, int goal, bool notFromTreeRoot = true) {
+            soFarList.Add(root.Value);
+            soFarValue += root.Value;
+            if (soFarValue == goal) {
+                mainList.Add(soFarList);
+            }
+            if (root.Left != null) {
+                _GetAllPathsThatSumTo(root.Left, mainList, new List<int>(soFarList), soFarValue, goal);
+                if (notFromTreeRoot) {
+                    _GetAllPathsThatSumTo(root.Left, mainList, new List<int>() {root.Value}, root.Value, goal);
+                }
+            }
+            if (root.Right != null) {
+                _GetAllPathsThatSumTo(root.Right, mainList, new List<int>(soFarList), soFarValue, goal);
+                if (notFromTreeRoot) {
+                    _GetAllPathsThatSumTo(root.Right, mainList, new List<int>(root.Value) {root.Value}, root.Value, goal);
+                }
+            }
         }
     }
 
@@ -289,6 +323,20 @@ namespace CI {
                 root.Right.Value = temp;
                 reShuffle(root.Right);
             }
+        }
+    }
+
+    public static class TreeExtensionMethods {
+        public static string AsString(this List<int> list) {
+            var result = new StringBuilder();
+            list.ForEach(element => {
+                result.Append(element);
+                result.Append(',');
+            });
+            if (result.Length > 1) {
+                result.Remove(result.Length - 1, 1);
+            }
+            return result.ToString();
         }
     }
 
