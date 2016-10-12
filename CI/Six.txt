@@ -1,0 +1,62 @@
+﻿1
+Q - You have 20 bottles of pills. 19 bottles have 1.0 gram pills, but one has pills of weight
+T.I grams. Given a scale that provides an exact measurement, how would you find
+the heavy bottle? You can only use the scale once.
+
+A - pick 1 pill form bottle 1, 2 pills from bottle 2,... 20 pills from bottle 20.
+Measure. The bottle that's overweight can be determined form how many grams over the total is. 
+E.g. if it's bottle 14, the total will be 1.4 grams over.
+
+2
+Q - There is an 8x8 chess board in which two diagonally opposite corners have been cut
+off. You are given 31 dominos, and a single domino can cover exactly two squares.
+Can you use the 31 dominos to cover the entire board? Prove your answer (by
+providing an example or showing why it's impossible).
+
+A - No. Any Domino will always take up one black square and one white square. So there would have to be 31 black squares and 31 white squares.
+A board with 2 diagonally opposite corners cut out, will have either 30 black, 32 white, or 32 black, 30 white.
+
+3
+Q -You have a five-quart jug, a three-quart jug, and an unlimited supply of water (but
+no measuring cups). How would you come up with exactly four quarts of water?
+Note that the jugs are oddly shaped, such that filling up exactly "half" of the jug
+would be impossible.
+
+A -  Fill 5 quart jug, pour enough to fill 3 quart jug, You have 2 left. Empty 3 quart, pour 2 quarts in it. Fill up 5 quart jug, fill up
+3 quart jug from 5 quart jug. You have 4 quarts left in 5 quart.
+
+4
+Q A bunch of people are living on an island, when a visitor comes with a strange order:
+all blue-eyed people must leave the island as soon as possible. There will be a flight
+out at 8:00pm every evening. Each person can see everyone else's eye color, but they
+do not know their own (nor is anyone allowed to tell them). Additionally, they do not
+know how many people have blue eyes, a/though they do know that at least one
+person does. How many days will it take the blue-eyed people to leave?
+
+A - If 1 Person, he will leave on the first night.
+If 2 ppl, both ov them will know that the 1 other blue eyed person that they can see has not left, will conclude that they are blue eyed too and leave the 2nd night.
+If 3 ppl, .....,will leave on the 3rd night.
+If N ppl, will leave on night N.
+
+5
+Q There is a building of 100 floors. If an egg drops from the Nth floor or above, it
+will break. If it's dropped from any floor below, it will not break. You're given two
+eggs. Find N, while minimizing the number of drops for the worst case.
+
+A - The solution is to minimise the sum of the 1st egg drop and 2nd egg drop. So the first egg is dropped
+14 floors up, then if it breaks, the second egg is dropped a max of 13 floors, for a total of 14. If the first egg
+doesn,t break, we can drop it 13 floors higher and if it breaks, the second egg can only be dropped a max of 12 times,
+for a total of 13. Etc.
+
+6
+Q There are 100 closed lockers in a hallway. A man begins by opening all 100 lockers.
+Next, he closes every second locker. Then, on his third pass, he toggles every third
+locker (closes it if it is open or opens it if it is closed). This process continues for / 00
+passes, such that on each pass i, the man toggles every ith locker. After his 100th
+pass in the hallway, in which he toggles only locker #100, how many lockers are
+open?
+
+A - The door will only be open if it's toggled an odd number of times, e.i. it has an odd number of factors including one and itself.
+the only numbers that have an odd number of factors are perfect squares, because for any number factos are pairs, e.g. (16,1), (8,2)
+, but(4,4)or (n,n) only counts as one factor. There are 10 perfect squares, betwwen 1 and 100.
+
