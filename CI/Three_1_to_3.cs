@@ -4,7 +4,7 @@ namespace CI
 {
     public class Three_1_to_3
     {
-        static void Main(string[] args) {
+ /*       static void XXX(string[] args) {
             var stack = new MyStack<int>();
             stack.push(1);
             stack.push(2);
@@ -38,7 +38,7 @@ namespace CI
             stack.push(1);
             stack.push(2);
             stack.push(3);
-        }
+        }*/
 
         public static void RemoveDuplicates<T>(LinkedList<T> list) {
             var node = list.First;
