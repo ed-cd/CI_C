@@ -85,6 +85,7 @@
     <Compile Include="Four_9_Test.cs" />
     <Compile Include="Seven_3_Test.cs" />
     <Compile Include="Seven_5.cs" />
+    <Compile Include="6E_16_1.cs" />
     <Compile Include="UsefulExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
