@@ -86,6 +86,9 @@
     <Compile Include="Seven_3_Test.cs" />
     <Compile Include="Seven_5.cs" />
     <Compile Include="6E_16_1.cs" />
+    <Compile Include="MS_Online.cs" />
+    <Compile Include="_6E_16_5_Test.cs" />
+    <Compile Include="_6E_16_2.cs" />
     <Compile Include="UsefulExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
