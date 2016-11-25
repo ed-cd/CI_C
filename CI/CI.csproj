@@ -92,6 +92,7 @@
     <Compile Include="6E_16_1.cs" />
     <Compile Include="CompareTheTriplets.cs" />
     <Compile Include="Ms1Int1Q3.cs" />
+    <Compile Include="_6E_16_18.cs" />
     <Compile Include="_6E_16_17.cs" />
     <Compile Include="_6E_8_10.cs" />
     <Compile Include="_6E_8_9.cs" />
