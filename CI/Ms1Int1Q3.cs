@@ -34,7 +34,7 @@ namespace CI
             Assert.IsTrue(reconstructedTree.InOrderTraversal.SequenceEqual(inOrderList));
             Assert.IsTrue(reconstructedTree.PostOrderTraversal.SequenceEqual(postOrderList));
             Assert.IsTrue(reconstructedTree.PreOrderTraversal.SequenceEqual(preOrderList));
-            //Assert.IsTrue(reconstructedTree.Equals(tree));
+            Assert.IsTrue(reconstructedTree == tree);
         }
     }
 }
