@@ -123,7 +123,7 @@ namespace CI
     [DebuggerDisplay("{Value}")]
     public class GraphNode<N, E>
     {
-        public N Value { get; private set; }
+        public N Value { get; }
         public readonly List<GraphEdge<N, E>> OutgoingEdges = new List<GraphEdge<N, E>>();
         public readonly List<GraphEdge<N, E>> IncomingEdges = new List<GraphEdge<N, E>>();
 

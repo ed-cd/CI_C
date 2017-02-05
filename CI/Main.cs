@@ -8,10 +8,27 @@ namespace CI
 {
     class XXX
     {
-        public static void Main(string[] args) {
-            for (var n = 1; n <= 10; n++) {
-                Console.Out.WriteLine($"{Seven_6.findNthIn357sequence(11)}");
+        public static void Main(string[] args)
+        {
+            //Your code goes here
+            //Console.WriteLine("Hello, world!");
+            fib(80, 50).ForEach(n=>Console.WriteLine(n));
+        }
+        public static List<int> fib(int n1, int n2)
+        {
+            if (n1 <= n2)
+            {
+                throw new Exception("not");
             }
+
+            var list = new List<int> { n1, n2 };
+            while (list.Last() != 0)
+            {
+                list.Add(list[list.Count - 2] - list[list.Count - 1]);
+                if (list.Last() < 0) throw new Exception("not");
+            }
+            return list;
         }
     }
+    
 }

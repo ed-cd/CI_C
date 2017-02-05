@@ -28,7 +28,7 @@ namespace CI
                 {
                     var posAfterB = -1;
                     var bs = 1;
-                    for()
+                   // for()
                 }
                 
 
