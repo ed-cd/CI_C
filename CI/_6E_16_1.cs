@@ -20,7 +20,7 @@ namespace CI
                 SwapInPlace1(ref new1, ref new2);
                 Assert.AreEqual(old1,new2);
                 Assert.AreEqual(old2,new1);
-                SwapInPlace1(ref new1, ref new2);
+                SwapInPlace2(ref new1, ref new2);
                 Assert.AreEqual(old1, new1);
                 Assert.AreEqual(old2, new2);
             });
@@ -29,7 +29,7 @@ namespace CI
         public void SwapInPlace1(ref int a, ref int b)
         {
             a = a - b;
-            b = b + 1;
+            b = b + a;
             a = b - a;
         }
 

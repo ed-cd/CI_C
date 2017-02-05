@@ -313,6 +313,27 @@ namespace CI
             list.Add(root.Value);
         }
 
+        public List<T> By_LevelTraversal 
+        {
+            get
+            {
+                var ret = new List<T>();
+                var queue = new Queue<TreeNode<T>>();
+                Action<TreeNode<T>> f = t =>
+                {
+                    ret.Add(t.Value);
+                    if (t.Left != null) queue.Enqueue(t.Left);
+                    if (t.Right != null) queue.Enqueue(t.Right);
+                };
+                queue.Enqueue(Root);
+                do
+                {
+                    f.Invoke(queue.Dequeue());
+                } while (queue.Count > 0);
+                return ret;
+            }
+        }
+
         public static Tree<T> ReconstructFromInorderAndPostOrder(List<T> inOrder, List<T> postOrder)
         {
             var tree = new Tree<T>();
