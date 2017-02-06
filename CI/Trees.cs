@@ -313,7 +313,7 @@ namespace CI
             list.Add(root.Value);
         }
 
-        public List<T> By_LevelTraversal 
+        public List<T> By_LevelTraversal
         {
             get
             {
@@ -333,6 +333,44 @@ namespace CI
                 return ret;
             }
         }
+
+        public void ConvertToDoublyLinkedList()
+        {
+            _ConvertToDoublyLinkedList(Root);
+        }
+
+        private void _ConvertToDoublyLinkedList(TreeNode<T> root)
+        {
+            var leftRightMost = _GetRightMostNode(root.Left);
+            var rightleftMost = _GetLeftMostNode(root.Right);
+            if (leftRightMost != null)
+            {
+                _ConvertToDoublyLinkedList(root.Left);
+                leftRightMost.Right = root;
+                root.Left = leftRightMost;
+            }
+            if (rightleftMost != null)
+            {
+                _ConvertToDoublyLinkedList(root.Right);
+                rightleftMost.Left = root;
+                root.Right = rightleftMost;
+            }
+        }
+
+        public TreeNode<T> _GetRightMostNode(TreeNode<T> root)
+        {
+            if (root == null) return null;
+            var ret = root.Right != null ? _GetRightMostNode(root.Right) : root;
+            return ret;
+        }
+
+        public TreeNode<T> _GetLeftMostNode(TreeNode<T> root)
+        {
+            if (root == null) return null;
+            var ret = root.Left != null ? _GetLeftMostNode(root.Left) : root;
+            return ret;
+        }
+
 
         public static Tree<T> ReconstructFromInorderAndPostOrder(List<T> inOrder, List<T> postOrder)
         {

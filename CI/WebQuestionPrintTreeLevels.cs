@@ -22,6 +22,8 @@ namespace CI
             tree.Add("I");
             tree.Add("H");
             var x = tree.By_LevelTraversal;
+            var test = tree._GetLeftMostNode(tree.Root);
+            tree.ConvertToDoublyLinkedList();            
 
             Assert.IsTrue(x.SequenceEqual(new List<string>() {"F", "B", "G", "A", "D", "I", "C", "E", "H"}));
         }
