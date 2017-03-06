@@ -10,9 +10,8 @@ namespace CI
     {
         public static void Main(string[] args)
         {
-            //Your code goes here
-            //Console.WriteLine("Hello, world!");
-            fib(80, 50).ForEach(n=>Console.WriteLine(n));
+            Console.WriteLine(RecursiveFileSearch.findFile("Elerian-20161210-14.save", "C:\\Users\\edmitriev\\Documents"));
+            Console.WriteLine(RecursiveFileSearch.findFile("Elerian-20161210-14.sav", "C:\\Users\\edmitriev\\Documents"));
         }
         public static List<int> fib(int n1, int n2)
         {
