@@ -92,6 +92,7 @@
     <Compile Include="6E_16_1.cs" />
     <Compile Include="CompareTheTriplets.cs" />
     <Compile Include="Ms1Int1Q3.cs" />
+    <Compile Include="FindIntsThatSumTo.cs" />
     <Compile Include="WebQuestionPrintTreeLevels.cs" />
     <Compile Include="_6E_16_6.cs" />
     <Compile Include="_6E_16_7.cs" />
