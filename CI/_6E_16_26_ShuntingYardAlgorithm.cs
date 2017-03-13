@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,9 +13,9 @@ namespace CI
         [TestMethod]
         public void TestMethod1()
         {
-            var input = "2*3+5/6*3+15";
+            const string input = "2*3+5/6*3+15";
             var result = PArseRpnForResult(ParseInfixToRpn(input));
-            Assert.Equals(result, 23.5);
+            Assert.IsTrue(Math.Abs(result - 23.5) < double.Epsilon);
         }
 
 
@@ -25,9 +26,10 @@ namespace CI
             {
                 if (foo is Operator)
                 {
-                    var x = stack.Pop();
                     var y = stack.Pop();
-                    stack.Push((foo as Operator).Operation.Invoke(x, y));
+                    var x = stack.Pop();
+                    var result = (foo as Operator).Operation.Invoke(x, y);
+                    stack.Push(result);
                 }
                 else if (foo is Wrapper)
                 {
@@ -50,6 +52,11 @@ namespace CI
                 if (operators.Contains(c))
                 {
                     list.Add(new Wrapper {Value = double.Parse(tokenisedString[n])});
+                    var newOperator = new Operator(c);
+                    while (stack.Count>0 && newOperator.Precedence <= stack.Peek().Precedence)
+                    {
+                        list.Add(stack.Pop());
+                    }
                     stack.Push(new Operator(c));
                     n++;
                 }
@@ -69,12 +76,22 @@ namespace CI
         private class Wrapper : IFoo
         {
             public double Value { get; set; }
+            public override string ToString()
+            {
+                return Value.ToString(CultureInfo.InvariantCulture);
+            }
         }
 
         private class Operator : IFoo
         {
-            public Func<double, double, double> Operation { get; private set; }
-            public int value { get; set; }
+            public Func<double, double, double> Operation { get; }
+            public int Precedence { get; }
+            private Func<string> _toString;
+
+            public override string ToString()
+            {
+                return _toString.Invoke();
+            }
 
             public Operator(char o)
             {
@@ -82,15 +99,21 @@ namespace CI
                 {
                     case '-':
                         Operation = (x, y) => x - y;
+                        _toString = () => "-";
                         break;
                     case '+':
                         Operation = (x, y) => x + y;
+                        _toString = () => "+";
                         break;
                     case '*':
                         Operation = (x, y) => x*y;
+                        _toString = () => "*";
+                        Precedence = 1;
                         break;
                     case '/':
                         Operation = (x, y) => x/y;
+                        _toString = () => "/";
+                        Precedence = 1;
                         break;
                     default:
                         throw new Exception("Invalid operator");
