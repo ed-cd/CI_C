@@ -96,6 +96,7 @@
     <Compile Include="Ms1Int1Q3.cs" />
     <Compile Include="HackerRank_HeapsFindTheRunningMedian.cs" />
     <Compile Include="FindIntsThatSumTo.cs" />
+    <Compile Include="_6E_16_26_ShuntingYardAlgorithm.cs" />
     <Compile Include="_6E_16_16.cs" />
     <Compile Include="WebQuestionPrintTreeLevels.cs" />
     <Compile Include="_6E_16_6.cs" />
