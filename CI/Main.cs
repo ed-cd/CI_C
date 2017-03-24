@@ -10,8 +10,7 @@ namespace CI
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(RecursiveFileSearch.findFile("Elerian-20161210-14.save", "C:\\Users\\edmitriev\\Documents"));
-            Console.WriteLine(RecursiveFileSearch.findFile("Elerian-20161210-14.sav", "C:\\Users\\edmitriev\\Documents"));
+            TestAsync.Test5Tasks().RunSynchronously();
         }
         public static List<int> fib(int n1, int n2)
         {

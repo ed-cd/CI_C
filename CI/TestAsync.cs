@@ -14,9 +14,22 @@ namespace CI
         {
         }
 
-        private async Task _testBasicAsync(int delay)
+        public static async Task Test5Tasks(bool configureAwait = true)
         {
-            var stopWatch = new Stopwatch();
+            await Task.WhenAll(TestBasicAsync(1111, "Task 1"), TestBasicAsync(1111, "Task 2"), TestBasicAsync(1111, "Task 3"),
+                TestBasicAsync(1111, "Task 4"), TestBasicAsync(1111, "Task 5"));
+        }
+
+        public static async Task TestBasicAsync(int delay,string name)
+        {
+            await Task.Delay(0);
+            var sw = Stopwatch.StartNew();
+            var start = sw.ElapsedMilliseconds;
+            var duration = start + delay;
+            while (sw.ElapsedMilliseconds < duration) { }
+            var end = sw.ElapsedMilliseconds;
+            var runTime = end - start;
+            Console.WriteLine($"Task {name} completed in {runTime} milliseconds");
         }
     }
 }
