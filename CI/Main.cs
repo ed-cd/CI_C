@@ -10,7 +10,7 @@ namespace CI
     {
         public static void Main(string[] args)
         {
-            TestAsync.Test5Tasks().RunSynchronously();
+            TestAsync.Test5Tasks();
         }
         public static List<int> fib(int n1, int n2)
         {
