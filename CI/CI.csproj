@@ -65,6 +65,7 @@
     <Compile Include="Heap.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Seven_6.cs" />
+    <Compile Include="TestThreads.cs" />
     <Compile Include="Trees.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Four_4.cs" />
