@@ -10,7 +10,7 @@ namespace CI
     {
         public static void Main(string[] args)
         {
-            TestAsync.Test5Tasks();
+            new TestYieldReturn().IterateTwice();
         }
     }
     

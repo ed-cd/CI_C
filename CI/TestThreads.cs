@@ -1,7 +1,16 @@
-﻿namespace CI
+﻿using System.Runtime.InteropServices;
+
+namespace CI
 {
-    public class TestThreads
+    public class DP
     {
         
+    }
+
+    public class CS { }
+
+    public class P
+    {
+        private int count;
     }
 }
