@@ -34,7 +34,7 @@ namespace CI
 
         public static async void Test5Tasks(bool configureAwait = true)
         {
-            await TestAsyncType(AsyncType.YieldImmediately);
+            await TestAsyncType(AsyncType.ConfigureAwaitTrue);
         }
 
         public static async Task TestBasicAsync(int delay, string name)

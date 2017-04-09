@@ -61,6 +61,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="LruCache.cs" />
+    <Compile Include="SinglyLinkedList.cs" />
     <Compile Include="recursiveFileSearch.cs" />
     <Compile Include="CustomClasses.cs" />
     <Compile Include="Heap.cs" />
@@ -102,6 +103,8 @@
     <Compile Include="Anagram.cs" />
     <Compile Include="TestAsync.cs" />
     <Compile Include="CountIslands.cs" />
+    <Compile Include="FindBiggestSubArraySum.cs" />
+    <Compile Include="LinkedListSortTests.cs" />
     <Compile Include="_6E_16_26_ShuntingYardAlgorithm.cs" />
     <Compile Include="_6E_16_16.cs" />
     <Compile Include="WebQuestionPrintTreeLevels.cs" />
