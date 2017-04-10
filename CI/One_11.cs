@@ -14,6 +14,8 @@ namespace CI
 
             var innerStartPos = lastPos;
 
+            const string original1 = "AABABBA";
+            const string rotation1 = "BABBAAA";
             var outerPos = lastPos;
             for (var innerPos = innerStartPos;;)
             {
